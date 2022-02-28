@@ -1,0 +1,26 @@
+/*
+  The GCP Project that houses the service accounts
+*/
+service_account_project  = "project-id-12345"
+
+/*
+  Run with service_account_project value above:
+  gcloud iam service-accounts keys create key-file \
+    --iam-account=terraform@project-id-12345.iam.gserviceaccount.com
+*/
+credentials_file         = "path/to/service-account-keys.json"
+
+/*
+  The ID of the GCP Billing account
+*/
+billing_account         = "XXXXXX-XXXXXX-XXXXXX"
+
+/*
+  The numeric ID of the GCP organization
+*/
+org_id                   = 1234567890
+
+/*
+  The ID of the GCP project for the Erigon ETH infra
+*/
+project_eth1_erigon = "project-id-12345"
