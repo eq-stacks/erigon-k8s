@@ -24,7 +24,7 @@ data "google_service_account" "terraform" {
 
 
 resource "google_project" "erigon_project" {
-  name                = "Eth1 (Erigon)"
+  name                = "Eth1 - Erigon"
   project_id          = var.project_eth1_erigon
   org_id              = var.org_id
   auto_create_network = false
