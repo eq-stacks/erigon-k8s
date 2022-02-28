@@ -1,0 +1,5 @@
+# Terraform stuff
+infrastructure/.terraform
+infrastructure/service-account-key.json 
+infrastructure/terraform.tfstate*
+infrastructure/terraform.tfvars
