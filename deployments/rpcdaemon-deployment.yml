@@ -29,6 +29,9 @@ spec:
               name: goerli-erigon-data
       containers:
         - name: goerli-erigon-rpcdaemon
+          securityContext:
+            readOnlyRootFilesystem: true
+            runAsUser: 1000
           resources:
             requests:
               memory: 250Mi
