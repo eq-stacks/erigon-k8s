@@ -21,9 +21,9 @@ billing_account         = "XXXXXX-XXXXXX-XXXXXX"
 org_id                   = 1234567890
 
 /*
-  The ID of the GCP project for the Erigon ETH infra
+  The ID of the GCP target project
 */
-project_eth1_erigon = "project-id-12345"
+target_project = "project-id-12345"
 
 /*
   Project owner email addresses
