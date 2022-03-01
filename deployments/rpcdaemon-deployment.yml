@@ -31,7 +31,6 @@ spec:
           image: thorax/erigon:v2022.01.01
           command: [
             "rpcdaemon",
-            "--datadir=/home/erigon/goerli",
             "--private.api.addr=localhost:9090",
             "--txpool.api.addr=localhost:9090",
             "--http.addr=0.0.0.0",
@@ -42,11 +41,4 @@ spec:
           ]
           ports:
             - containerPort: 8545
-          volumeMounts:
-            - mountPath: /home/erigon/goerli
-              name: goerli-erigon-data
       restartPolicy: Always
-      volumes:
-        - name: goerli-erigon-data
-          persistentVolumeClaim:
-            claimName: goerli-erigon-data
