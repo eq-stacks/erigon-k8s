@@ -24,3 +24,15 @@ org_id                   = 1234567890
   The ID of the GCP project for the Erigon ETH infra
 */
 project_eth1_erigon = "project-id-12345"
+
+/*
+  Project owner email addresses
+*/
+project_owners = [
+    "user:email@example.com"
+  ]
+
+/*
+  The ID of the GCP project that contains the host vpc
+*/
+project_host_vpc = "project-id-54321"
