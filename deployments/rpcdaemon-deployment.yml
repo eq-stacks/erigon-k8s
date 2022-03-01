@@ -41,8 +41,8 @@ spec:
           image: thorax/erigon:v2022.01.01
           command: [
             "rpcdaemon",
-            "--private.api.addr=localhost:9090",
-            "--txpool.api.addr=localhost:9090",
+            "--private.api.addr=goerli-erigon:9090",
+            "--txpool.api.addr=goerli-erigon:9090",
             "--http.addr=0.0.0.0",
             "--http.vhosts=*",
             "--http.corsdomain=*",
