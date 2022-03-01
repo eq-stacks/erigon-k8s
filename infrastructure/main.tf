@@ -46,3 +46,13 @@ resource "google_compute_shared_vpc_service_project" "eth2_validator_service_pro
   host_project    = var.project_host_vpc
   service_project = google_project.erigon_project.project_id
 }
+
+resource "google_project_service" "container" {
+  project = google_project.eth2_validator_project.id
+  service = "container.googleapis.com"
+
+  disable_dependent_services = true
+  depends_on = [
+    google_project.project_eth1_erigon
+  ]
+}
