@@ -9,24 +9,13 @@ spec:
     matchLabels:
       app: goerli-erigon-rpcdaemon
   revisionHistoryLimit: 0
-  replicas: 1
+  replicas: 2
   template:
     metadata:
       labels:
         app: goerli-erigon-rpcdaemon
     spec:
       shareProcessNamespace: true
-      initContainers:
-        - name: chown
-          image: busybox
-          command:
-            - chown
-            - -R
-            - "1000:1000"
-            - /home/erigon/goerli
-          volumeMounts:
-            - mountPath: /home/erigon/goerli
-              name: goerli-erigon-data
       containers:
         - name: goerli-erigon-rpcdaemon
           securityContext:
