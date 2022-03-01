@@ -15,6 +15,16 @@ spec:
       labels:
         app: goerli-erigon-rpcdaemon
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values:
+                  - goerli-erigon-rpcdaemon
+              topologyKey: "kubernetes.io/hostname"
       shareProcessNamespace: true
       containers:
         - name: goerli-erigon-rpcdaemon
