@@ -1,0 +1,60 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goerli-erigon-rpcdaemon
+  namespace: erigon
+spec:
+  selector:
+    matchLabels:
+      app: goerli-erigon-rpcdaemon
+  revisionHistoryLimit: 0
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: goerli-erigon-rpcdaemon
+    spec:
+      shareProcessNamespace: true
+      initContainers:
+        - name: chown
+          image: busybox
+          command:
+            - chown
+            - -R
+            - "1000:1000"
+            - /home/erigon/goerli
+          volumeMounts:
+            - mountPath: /home/erigon/goerli
+              name: goerli-erigon-data
+      containers:
+        - name: goerli-erigon-rpcdaemon
+          resources:
+            requests:
+              memory: 250Mi
+              cpu: 100m
+            limits:
+              memory: 250Mi
+              cpu: 100m
+          image: thorax/erigon:v2022.01.01
+          command: [
+            "rpcdaemon",
+            "--datadir=/home/erigon/goerli",
+            "--private.api.addr=localhost:9090",
+            "--txpool.api.addr=localhost:9090",
+            "--http.addr=0.0.0.0",
+            "--http.vhosts=*",
+            "--http.corsdomain=*",
+            "--http.api=eth,debug,net",
+            "--ws"
+          ]
+          ports:
+            - containerPort: 8545
+          volumeMounts:
+            - mountPath: /home/erigon/goerli
+              name: goerli-erigon-data
+      restartPolicy: Always
+      volumes:
+        - name: goerli-erigon-data
+          persistentVolumeClaim:
+            claimName: goerli-erigon-data

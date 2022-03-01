@@ -1,0 +1,64 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: goerli-erigon
+  namespace: erigon
+spec:
+  selector:
+    matchLabels:
+      app: goerli-erigon
+  revisionHistoryLimit: 0
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: goerli-erigon
+    spec:
+      shareProcessNamespace: true
+      initContainers:
+        - name: chown
+          image: busybox
+          command:
+            - chown
+            - -R
+            - "1000:1000"
+            - /home/erigon/goerli
+          volumeMounts:
+            - mountPath: /home/erigon/goerli
+              name: goerli-erigon-data
+      containers:
+        - name: goerli-erigon
+          resources:
+            requests:
+              memory: 2Gi
+              cpu: 250m
+            limits:
+              memory: 2Gi
+              cpu: 250m
+          command: [
+            "erigon",
+            "--datadir=/home/erigon/goerli",
+            "--chain=goerli",
+            "--metrics",
+            "--metrics.addr=0.0.0.0",
+            "--metrics.port=6060",
+            "--private.api.addr=localhost:9090",
+            "--pprof",
+            "--pprof.addr=0.0.0.0",
+            "--pprof.port=6061"
+          ]
+          image: thorax/erigon:v2022.01.01
+          ports:
+            - containerPort: 30303
+            - containerPort: 6060
+            - containerPort: 6061
+            - containerPort: 9090
+          volumeMounts:
+            - mountPath: /home/erigon/goerli
+              name: goerli-erigon-data
+      restartPolicy: Always
+      volumes:
+        - name: goerli-erigon-data
+          persistentVolumeClaim:
+            claimName: goerli-erigon-data

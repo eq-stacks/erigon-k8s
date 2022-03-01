@@ -1,0 +1,18 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: goerli-erigon
+  namespace: erigon
+spec:
+  selector:
+    app: goerli-erigon
+  ports:
+    - name: "ws-rpc"
+      port: 8546
+      targetPort: 8546
+    - name: "metrics"
+      port: 6060
+      targetPort: 6060
+status:
+  loadBalancer: {}
