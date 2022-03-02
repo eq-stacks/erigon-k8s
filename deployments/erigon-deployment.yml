@@ -51,7 +51,7 @@ spec:
             "--pprof.addr=0.0.0.0",
             "--pprof.port=6061"
           ]
-          image: thorax/erigon:v2022.01.01
+          image: thorax/erigon:v2022.02.04
           ports:
             - containerPort: 30303
             - containerPort: 6060
