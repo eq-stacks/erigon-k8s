@@ -34,11 +34,11 @@ spec:
             runAsUser: 1000
           resources:
             requests:
-              memory: 2Gi
-              cpu: 250m
+              memory: 8Gi
+              cpu: 3000m
             limits:
-              memory: 2Gi
-              cpu: 250m
+              memory: 8Gi
+              cpu: 3000m
           command: [
             "erigon",
             "--datadir=/home/erigon/goerli",
